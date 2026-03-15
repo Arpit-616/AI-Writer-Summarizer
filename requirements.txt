@@ -1,0 +1,5 @@
+flask
+pandas
+textstat
+transformers
+torch

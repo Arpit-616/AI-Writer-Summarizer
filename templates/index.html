@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-powered article summarizer using BART (facebook/bart-large-cnn). Paste any article and get an instant abstractive summary with readability analytics." />
+  <title>AI Writer &amp; Summarizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="orb orb--purple"></div>
+  <div class="orb orb--teal"></div>
+
+  <div class="container">
+
+    <!-- ── Header ──────────────────────────────────────── -->
+    <header class="header fade-up">
+      <span class="header__badge">Powered by BART</span>
+      <h1 class="header__title">AI Writer &amp; Summarizer</h1>
+      <p class="header__sub">Paste any article and get an instant abstractive summary with readability analytics.</p>
+    </header>
+
+    <!-- ── Input Card ──────────────────────────────────── -->
+    <section class="card fade-up" id="input-card">
+      <div class="card__label">Article Text</div>
+      <textarea
+        id="article-input"
+        class="textarea"
+        placeholder="Paste your article here (minimum 100 characters)…"
+        spellcheck="false"
+      ></textarea>
+      <div class="char-count" id="char-count">0 characters</div>
+
+      <div class="btn-row">
+        <button class="btn btn--primary" id="btn-summarize" onclick="summarize()">
+          <span class="btn-text">✦ Summarize</span>
+          <span class="spinner"></span>
+        </button>
+        <button class="btn btn--ghost" id="btn-sample" onclick="loadSample()">
+          ↻ Load Sample Article
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Results Card (hidden until summary) ─────────── -->
+    <section class="card fade-up hidden" id="result-card">
+      <div class="card__label">Generated Summary</div>
+      <div class="summary-text" id="summary-text"></div>
+
+      <!-- Reference (only shown when a sample is loaded) -->
+      <div class="reference-box hidden" id="reference-box">
+        <div class="reference-box__title">Reference Summary (Ground Truth)</div>
+        <div id="reference-text"></div>
+      </div>
+
+      <!-- Stats grid -->
+      <div class="stats" id="stats-grid">
+        <div class="stat">
+          <span class="stat__value" id="stat-original">—</span>
+          <span class="stat__label">Original Words</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value" id="stat-summary">—</span>
+          <span class="stat__label">Summary Words</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value" id="stat-compression">—</span>
+          <span class="stat__label">Compression</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value" id="stat-readability">—</span>
+          <span class="stat__label">Readability</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value" id="stat-grade">—</span>
+          <span class="stat__label">Grade Level</span>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

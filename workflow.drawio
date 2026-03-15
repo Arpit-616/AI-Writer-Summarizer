@@ -1,0 +1,126 @@
+<mxfile host="65bd71144e">
+    <diagram id="workflow" name="AI Summarizer Workflow">
+        <mxGraphModel dx="1200" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" background="#FFFFFF" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="AI Writer &amp; Summarizer — Application Workflow" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontColor=#1A1A2E;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="20" width="500" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer_user" value="USER (Browser)" style="swimlane;startSize=30;fillColor=#E8DAEF;strokeColor=#08040A;fontStyle=1;fontSize=14;fontColor=#1A1A2E;rounded=1;arcSize=10;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="80" width="340" height="750" as="geometry"/>
+                </mxCell>
+                <mxCell id="s1" value="Open Browser&#10;http://127.0.0.1:5000" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#27AE60;fontStyle=1;fontSize=12;fontColor=#1A1A2E;" parent="layer_user" vertex="1">
+                    <mxGeometry x="60" y="50" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="s2" value="Choose Action" style="rhombus;whiteSpace=wrap;fillColor=#FDEBD0;strokeColor=#E67E22;fontStyle=1;fontSize=12;fontColor=#1A1A2E;" parent="layer_user" vertex="1">
+                    <mxGeometry x="70" y="130" width="180" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="s1" target="s2" edge="1"/>
+                <mxCell id="s3a" value="Paste Article Text&#10;(≥ 100 characters)" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=11;fontColor=#1A1A2E;" parent="layer_user" vertex="1">
+                    <mxGeometry x="10" y="240" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2a" value="Manual" style="edgeStyle=orthogonalEdgeStyle;rounded=1;fontSize=10;fontColor=#333333;strokeColor=#333333;" parent="layer_user" source="s2" target="s3a" edge="1"/>
+                <mxCell id="s3b" value="Click&#10;&quot;Load Sample Article&quot;" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=11;fontColor=#1A1A2E;" parent="layer_user" vertex="1">
+                    <mxGeometry x="180" y="240" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2b" value="Sample" style="edgeStyle=orthogonalEdgeStyle;rounded=1;fontSize=10;fontColor=#333333;strokeColor=#333333;" parent="layer_user" source="s2" target="s3b" edge="1"/>
+                <mxCell id="s4" value="Click &quot;✦ Summarize&quot;" style="rounded=1;whiteSpace=wrap;fillColor=#6C5CE7;strokeColor=#4A3CB5;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" parent="layer_user" vertex="1">
+                    <mxGeometry x="60" y="350" width="200" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="s3a" target="s4" edge="1"/>
+                <mxCell id="e3b" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="s3b" target="s4" edge="1"/>
+                <mxCell id="s5" value="⏳ Loading Spinner&#10;(Waiting for API)" style="rounded=1;whiteSpace=wrap;fillColor=#FEF9E7;strokeColor=#F1C40F;fontSize=11;fontColor=#1A1A2E;dashed=1;" parent="layer_user" vertex="1">
+                    <mxGeometry x="60" y="430" width="200" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="s4" target="s5" edge="1"/>
+                <mxCell id="s6" value="View Results Panel" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#27AE60;fontStyle=1;fontSize=12;fontColor=#1A1A2E;" parent="layer_user" vertex="1">
+                    <mxGeometry x="60" y="520" width="200" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="s5" target="s6" edge="1"/>
+                <mxCell id="r1" value="📝 Generated Summary" style="rounded=1;whiteSpace=wrap;fillColor=#EBF5FB;strokeColor=#3498DB;fontSize=10;fontColor=#1A1A2E;" parent="layer_user" vertex="1">
+                    <mxGeometry x="20" y="590" width="130" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="r2" value="📊 Stats Grid&#10;(Words, Compression,&#10;Readability, Grade)" style="rounded=1;whiteSpace=wrap;fillColor=#EBF5FB;strokeColor=#3498DB;fontSize=10;fontColor=#1A1A2E;" parent="layer_user" vertex="1">
+                    <mxGeometry x="170" y="585" width="140" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="r3" value="📋 Reference Summary&#10;(if sample loaded)" style="rounded=1;whiteSpace=wrap;fillColor=#E8F8F5;strokeColor=#1ABC9C;fontSize=10;fontColor=#1A1A2E;dashed=1;" parent="layer_user" vertex="1">
+                    <mxGeometry x="60" y="650" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="er1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="s6" target="r1" edge="1"/>
+                <mxCell id="er2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="s6" target="r2" edge="1"/>
+                <mxCell id="er3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_user" source="r1" target="r3" edge="1"/>
+                <mxCell id="layer_flask" value="FLASK SERVER (app.py)" style="swimlane;startSize=30;fillColor=#D4E6F1;strokeColor=#2471A3;fontStyle=1;fontSize=14;fontColor=#1A1A2E;rounded=1;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="80" width="300" height="750" as="geometry"/>
+                </mxCell>
+                <mxCell id="f1" value="GET /&#10;render index.html" style="rounded=1;whiteSpace=wrap;fillColor=#FDEBD0;strokeColor=#E67E22;fontSize=11;fontColor=#1A1A2E;" parent="layer_flask" vertex="1">
+                    <mxGeometry x="60" y="50" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="f2" value="GET /sample&#10;Load random article&#10;from test.csv" style="rounded=1;whiteSpace=wrap;fillColor=#FDEBD0;strokeColor=#E67E22;fontSize=11;fontColor=#1A1A2E;" parent="layer_flask" vertex="1">
+                    <mxGeometry x="60" y="200" width="180" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="f3" value="POST /summarize&#10;Validate ≥ 100 chars" style="rounded=1;whiteSpace=wrap;fillColor=#FDEBD0;strokeColor=#E67E22;fontSize=11;fontColor=#1A1A2E;" parent="layer_flask" vertex="1">
+                    <mxGeometry x="60" y="340" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="f4" value="Call&#10;summarize_article(text)" style="rounded=1;whiteSpace=wrap;fillColor=#6C5CE7;strokeColor=#4A3CB5;fontColor=#FFFFFF;fontStyle=1;fontSize=11;" parent="layer_flask" vertex="1">
+                    <mxGeometry x="60" y="430" width="180" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="ef1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_flask" source="f3" target="f4" edge="1"/>
+                <mxCell id="f5" value="Compute Stats&#10;• word counts&#10;• compression ratio&#10;• readability (textstat)" style="rounded=1;whiteSpace=wrap;fillColor=#E8DAEF;strokeColor=#8E44AD;fontSize=10;fontColor=#1A1A2E;" parent="layer_flask" vertex="1">
+                    <mxGeometry x="60" y="510" width="180" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="ef2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_flask" source="f4" target="f5" edge="1"/>
+                <mxCell id="f6" value="Return JSON Response&#10;{summary, stats}" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#27AE60;fontStyle=1;fontSize=11;fontColor=#1A1A2E;" parent="layer_flask" vertex="1">
+                    <mxGeometry x="60" y="610" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ef3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_flask" source="f5" target="f6" edge="1"/>
+                <mxCell id="layer_model" value="BART MODEL (cnn_summarizer.py)" style="swimlane;startSize=30;fillColor=#FADBD8;strokeColor=#E74C3C;fontStyle=1;fontSize=14;fontColor=#1A1A2E;rounded=1;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="800" y="80" width="320" height="750" as="geometry"/>
+                </mxCell>
+                <mxCell id="m1" value="Load facebook/bart-large-cnn&#10;(at startup — ~1.6 GB)" style="rounded=1;whiteSpace=wrap;fillColor=#FADBD8;strokeColor=#E74C3C;fontSize=11;fontStyle=1;fontColor=#1A1A2E;" parent="layer_model" vertex="1">
+                    <mxGeometry x="50" y="50" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="m2" value="Detect Device&#10;CUDA GPU / CPU" style="rhombus;whiteSpace=wrap;fillColor=#FEF9E7;strokeColor=#F1C40F;fontSize=11;fontColor=#1A1A2E;" parent="layer_model" vertex="1">
+                    <mxGeometry x="70" y="130" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="em1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_model" source="m1" target="m2" edge="1"/>
+                <mxCell id="m3" value="chunk_text()&#10;Split article into&#10;≤ 900-word chunks" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=11;fontColor=#1A1A2E;" parent="layer_model" vertex="1">
+                    <mxGeometry x="50" y="340" width="220" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="m4" value="Tokenize each chunk&#10;(AutoTokenizer, max 1024)" style="rounded=1;whiteSpace=wrap;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=11;fontColor=#1A1A2E;" parent="layer_model" vertex="1">
+                    <mxGeometry x="50" y="430" width="220" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="em2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_model" source="m3" target="m4" edge="1"/>
+                <mxCell id="m5" value="model.generate()&#10;num_beams=4&#10;max_length=150, min_length=40" style="rounded=1;whiteSpace=wrap;fillColor=#6C5CE7;strokeColor=#4A3CB5;fontColor=#FFFFFF;fontStyle=1;fontSize=11;" parent="layer_model" vertex="1">
+                    <mxGeometry x="50" y="510" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="em3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_model" source="m4" target="m5" edge="1"/>
+                <mxCell id="m6" value="Decode &amp; Join&#10;partial summaries" style="rounded=1;whiteSpace=wrap;fillColor=#D5F5E3;strokeColor=#27AE60;fontSize=11;fontColor=#1A1A2E;" parent="layer_model" vertex="1">
+                    <mxGeometry x="50" y="610" width="220" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="em4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;" parent="layer_model" source="m5" target="m6" edge="1"/>
+                <mxCell id="x1" value="GET /" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeColor=#555555;fontSize=10;fontStyle=2;fontColor=#333333;" parent="1" source="s1" target="f1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="x2" value="GET /sample" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeColor=#555555;fontSize=10;fontStyle=2;fontColor=#333333;" parent="1" source="s3b" target="f2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="x3" value="POST /summarize" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeColor=#555555;fontSize=10;fontStyle=2;fontColor=#333333;" parent="1" source="s4" target="f3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="x4" value="summarize_article()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeColor=#C0392B;fontSize=10;fontStyle=2;fontColor=#C0392B;" parent="1" source="f4" target="m3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="x5" value="return summary" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeColor=#27AE60;fontSize=10;fontStyle=2;fontColor=#1E8449;" parent="1" source="m6" target="f6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds" value="📁 CNN-DailyMail Dataset&#10;test.csv (11,490 rows)&#10;~/.cache/kagglehub/..." style="shape=cylinder3;whiteSpace=wrap;boundedLbl=1;size=12;fillColor=#FEF9E7;strokeColor=#F39C12;fontSize=10;fontStyle=0;fontColor=#1A1A2E;" parent="1" vertex="1">
+                    <mxGeometry x="870" y="230" width="180" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="xds" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeColor=#F39C12;" parent="1" source="f2" target="ds" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
