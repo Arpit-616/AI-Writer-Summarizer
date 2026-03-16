@@ -1,6 +1,4 @@
 flask
 gunicorn
-pandas
+requests
 textstat
-transformers
-torch

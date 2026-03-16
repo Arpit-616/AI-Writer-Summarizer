@@ -1,10 +1,33 @@
 from flask import Flask, render_template, request, jsonify
-import pandas as pd
+import requests
 import os
-from cnn_summarizer import summarize_article
 import textstat
 
 app = Flask(__name__)
+
+# ── Hugging Face Inference API ────────────────────────────────
+API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
+HF_TOKEN = os.environ.get("HF_TOKEN", "")
+headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+
+
+def summarize_article(text: str) -> str:
+    """Summarize text using the Hugging Face Inference API."""
+    payload = {
+        "inputs": text,
+        "parameters": {
+            "max_length": 150,
+            "min_length": 40,
+            "do_sample": False,
+        },
+    }
+    response = requests.post(API_URL, headers=headers, json=payload, timeout=120)
+    response.raise_for_status()
+    result = response.json()
+
+    if isinstance(result, list) and len(result) > 0:
+        return result[0].get("summary_text", "")
+    return ""
 
 
 @app.route("/")
@@ -20,7 +43,13 @@ def summarize():
     if len(text) < 100:
         return jsonify({"error": "Please provide at least 100 characters."}), 400
 
-    summary = summarize_article(text)
+    try:
+        summary = summarize_article(text)
+    except requests.exceptions.RequestException as e:
+        return jsonify({"error": f"HuggingFace API error: {str(e)}"}), 502
+
+    if not summary:
+        return jsonify({"error": "Failed to generate summary."}), 500
 
     return jsonify({
         "summary":             summary,
@@ -29,26 +58,6 @@ def summarize():
         "compression_ratio":   round(len(summary.split()) / len(text.split()), 3),
         "readability_score":   round(textstat.flesch_reading_ease(summary), 2),
         "readability_grade":   textstat.text_standard(summary, float_output=False),
-    })
-
-
-# ── Load a random CNN-DailyMail sample for demo ──────────────
-@app.route("/sample")
-def sample():
-    csv_path = os.path.join(
-        os.path.expanduser("~"),
-        ".cache", "kagglehub", "datasets", "gowrishankarp",
-        "newspaper-text-summarization-cnn-dailymail", "versions", "2",
-        "cnn_dailymail", "test.csv"
-    )
-    if not os.path.isfile(csv_path):
-        return jsonify({"error": "Sample dataset (cnn_dailymail/test.csv) not found."}), 404
-
-    df  = pd.read_csv(csv_path).dropna()
-    row = df.sample(1).iloc[0]
-    return jsonify({
-        "article":   row["article"],
-        "reference": row["highlights"],
     })
 
 
