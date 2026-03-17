@@ -1,4 +1,5 @@
 flask
 gunicorn
-requests
+huggingface_hub
 textstat
+python-dotenv
