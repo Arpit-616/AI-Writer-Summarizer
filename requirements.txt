@@ -1,4 +1,5 @@
 flask
+requests
 gunicorn
 huggingface_hub
 textstat
